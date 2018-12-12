@@ -16,4 +16,6 @@ jobs:
     
     steps:
       - checkout
+      - run: node --version
       - run: node -e "console.log('Hello World')"
+      - run: ruby --version
