@@ -75,3 +75,5 @@ workflows:
     jobs:
       - build-the-app
       - test-the-app
+        requires:
+          - build-the-app
