@@ -1,0 +1,10 @@
+{
+  "name": "circleci-hello-world",
+  "version": "1.0.0",
+  "description": "Testing builds using Circle CI",
+  "main": "index.js",
+  "repository": "git@github.com:roypa/circleci-hello-world.git",
+  "author": "Roy Paulsen <roy.paulsen@royp.net>",
+  "license": "MIT",
+  "private": true
+}
