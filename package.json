@@ -6,5 +6,11 @@
   "repository": "git@github.com:roypa/circleci-hello-world.git",
   "author": "Roy Paulsen <roy.paulsen@royp.net>",
   "license": "MIT",
-  "private": true
+  "private": true,
+  "scripts": {
+    "test": "echo \"Hello World at \n- local-time = $(date '+%d.%m.%Y %H:%M') \n- Oslo-time = $(TZ=Europe/Oslo date '+%d.%m.%Y %H:%M')\""
+  },
+  "dependencies": {
+    "dyson": "^2.0.2"
+  }
 }
