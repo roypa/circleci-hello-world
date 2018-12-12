@@ -34,6 +34,16 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
+      # Testing workspace
+      - run: mkdir -p roys_workspace
+      - run: echo "Trying out workspaces" > roys_workspace/echo-output
+      - persist_to_workspace:
+          # Must be an absolute path, or relative path from working_directory
+          root: roys_workspace
+          # Must be relative path from root
+          paths:
+            - echo-output
+
   test-the-app:
     docker:
       - image: circleci/node:10
@@ -47,6 +57,17 @@ jobs:
           - v1-dependencies-
 
       - run: yarn test
+
+      - attach_workspace:
+          # Must be absolute path or relative path from working_directory
+          at: roys_workspace
+
+      - run: |
+          if [[ $(cat roys_workspace/echo-output) == "Trying out workspaces" ]]; then
+            echo "It worked!";
+          else
+            echo "Nope!"; exit 1
+          fi
 
 workflows:
   version: 2
