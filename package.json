@@ -11,6 +11,7 @@
     "test": "echo \"Hello World at \n- local-time = $(date '+%d.%m.%Y %H:%M') \n- Oslo-time = $(TZ=Europe/Oslo date '+%d.%m.%Y %H:%M')\""
   },
   "dependencies": {
-    "dyson": "^2.0.2"
+    "dyson": "^2.0.2",
+    "lodash": "4.17.11"
   }
 }

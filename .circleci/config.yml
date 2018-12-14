@@ -1,5 +1,6 @@
-# Javascript Node CircleCI 2.0 configuration file
+# This config is a test following the guide found at https://circleci.com/docs/2.0/hello-world/#section=getting-started
 #
+# Javascript Node CircleCI 2.0 configuration file
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
 #
 version: 2
@@ -20,7 +21,7 @@ jobs:
       - run: node -e "console.log('Hello World')"
       # - run: ruby --version
 
-      # Download and cache dependencies
+      # cache can be restored between runs, while persist_to_workspace/attach_workspace is transfer of state between jobs in the same run
       - restore_cache:
           keys:
           - v1-dependencies-{{ checksum "package.json" }}
@@ -36,13 +37,13 @@ jobs:
 
       # Testing workspace
       - run: mkdir -p roys_workspace
-      - run: echo "Trying out workspaces" > roys_workspace/echo-output
+      - run: echo "Trying out workspaces" > roys_workspace/echo-output.txt
       - persist_to_workspace:
           # Must be an absolute path, or relative path from working_directory
           root: roys_workspace
           # Must be relative path from root
           paths:
-            - echo-output
+            - echo-output.txt
 
   test-the-app:
     docker:
@@ -63,7 +64,7 @@ jobs:
           at: roys_workspace
 
       - run: |
-          if [[ $(cat roys_workspace/echo-output) == "Trying out workspaces" ]]; then
+          if [[ $(cat roys_workspace/echo-output.txt) == "Trying out workspaces" ]]; then
             echo "It worked!";
           else
             echo "Nope!"; exit 1
