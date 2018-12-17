@@ -14,7 +14,7 @@ commands:
         default: World
     steps:
       - run: node --version
-      - run: node -e "console.log(`Hello << parameters.who >>`)"
+      - run: node -e "console.log('Hello << parameters.who >>')"
 
 jobs:
   build-the-app:
