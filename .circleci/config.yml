@@ -3,7 +3,19 @@
 # Javascript Node CircleCI 2.0 configuration file
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
 #
-version: 2
+version: 2.1
+
+commands:
+  say-hello-using-node:
+    description: "console.log using Node.js"
+    parameters:
+      who:
+        type: string
+        default: World
+    steps:
+      - run: node --version
+      - run: node -e "console.log(´Hello << parameters.who >>`)"
+
 jobs:
   build-the-app:
     docker:
@@ -17,8 +29,10 @@ jobs:
 
     steps:
       - checkout
-      - run: node --version
-      - run: node -e "console.log('Hello World')"
+      - say-hello-using-node:
+          who: Roy from inside config.yml
+      - say-hello-using-node:
+          who: $ROYS_FULL_NAME # defined in context "Roys Context"
       # - run: ruby --version
 
       # cache can be restored between runs, while persist_to_workspace/attach_workspace is transfer of state between jobs in the same run
@@ -57,6 +71,7 @@ jobs:
           - v1-dependencies-{{ checksum "package.json" }}
           - v1-dependencies-
 
+      - say-hello-using-node
       - run: yarn test
 
       - attach_workspace:
@@ -74,7 +89,10 @@ workflows:
   version: 2
   buid-and-test:
     jobs:
-      - build-the-app
+      - build-the-app:
+          # The job will use the variables set in the context named "Roys Context"
+          # Defined at https://circleci.com/gh/organizations/roypa/settings#contexts
+          context: Roys Context
       - test-the-app:
           requires:
             - build-the-app
