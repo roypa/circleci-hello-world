@@ -32,7 +32,7 @@ jobs:
       - say-hello-using-node:
           who: Roy from inside config.yml
       - say-hello-using-node:
-          who: '$ROYS_FULL_NAME' found in context # defined in context "Roys Context"
+          who: "'$ROYS_FULL_NAME' found in context" # defined in context "Roys Context"
       # - run: ruby --version
 
       # cache can be restored between runs, while persist_to_workspace/attach_workspace is transfer of state between jobs in the same run
