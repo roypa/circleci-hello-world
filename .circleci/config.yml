@@ -61,9 +61,9 @@ jobs:
           paths:
             - echo-output.txt
             # Does not work to use ENV variables in paths
-            - $CIRCLE_PROJECT_REPONAME.txt
+            #- $CIRCLE_PROJECT_REPONAME.txt
             # But globbing works (see https://circleci.com/docs/2.0/configuration-reference/#persist_to_workspace)
-            - *.txt
+            - ./*.txt
 
   test-the-app:
     docker:
