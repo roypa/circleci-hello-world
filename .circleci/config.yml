@@ -80,6 +80,7 @@ jobs:
           # Must be absolute path or relative path from working_directory
           at: roys_workspace
 
+      - run: ls -l ./roys_workspace/
       - run: |
           if [[ $(cat roys_workspace/echo-output.txt) == "Trying out workspaces" ]]; then
             echo "It worked!";
