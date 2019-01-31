@@ -52,12 +52,14 @@ jobs:
       # Testing workspace
       - run: mkdir -p roys_workspace
       - run: echo "Trying out workspaces" > roys_workspace/echo-output.txt
+      - run: echo "Trying out $CIRCLE_PROJECT_REPONAME" > roys_workspace/$CIRCLE_PROJECT_REPONAME.txt
       - persist_to_workspace:
           # Must be an absolute path, or relative path from working_directory
           root: roys_workspace
           # Must be relative path from root
           paths:
             - echo-output.txt
+            - $CIRCLE_PROJECT_REPONAME.txt
 
   test-the-app:
     docker:
