@@ -85,6 +85,11 @@ jobs:
           at: roys_workspace
 
       - run: ls -l ./roys_workspace/
+      - run:
+          name: Check that the expected files exists
+          command: |
+            test -f ./roys_workspace/echo-output.txt
+            test -f ./roys_workspace/$CIRCLE_PROJECT_REPONAME.txt
       - run: |
           if [[ $(cat roys_workspace/echo-output.txt) == "Trying out workspaces" ]]; then
             echo "It worked!";
