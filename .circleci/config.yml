@@ -65,6 +65,21 @@ jobs:
             # But globbing works (see https://circleci.com/docs/2.0/configuration-reference/#persist_to_workspace)
             - ./*.txt
 
+  do-stuff-if:
+    docker:
+      - image: circleci/node:10
+    parameters:
+      should-run:
+        type: boolean
+        default: true
+    steps:
+      when:
+        condition: << parameters.should-run >>
+        steps:
+          - run: cat ./roys_workspace/echo-output.txt
+          - run: cat ./roys_workspace/$CIRCLE_PROJECT_REPONAME.txt
+
+
   test-the-app:
     docker:
       - image: circleci/node:10
@@ -105,6 +120,10 @@ workflows:
           # The job will use the variables set in the context named "Roys Context"
           # Defined at https://circleci.com/gh/organizations/roypa/settings#contexts
           context: Roys Context
-      - test-the-app:
+      - do-stuff-if:
+          should-run: true
           requires:
             - build-the-app
+      - test-the-app:
+          requires:
+            - do-stuff-if
