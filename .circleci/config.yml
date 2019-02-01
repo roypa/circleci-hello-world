@@ -79,7 +79,7 @@ jobs:
           at: roys_workspace
       - run: pwd
       - run: ls -l
-      - run: "echo Should this be run: << parameters.should-run >>"
+      - run: "echo Should the next two steps run: << parameters.should-run >>"
       - when:
           condition: << parameters.should-run >>
           steps:
