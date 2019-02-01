@@ -79,7 +79,7 @@ jobs:
             - v1-dependencies-{{ checksum "package.json" }}
             - v1-dependencies-
       - run: pwd
-      - run: tree .
+      - run: ls -l
       - run: "echo Should this be run: << parameters.should-run >>"
       - when:
           condition: << parameters.should-run >>
