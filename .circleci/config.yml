@@ -128,7 +128,9 @@ workflows:
           # Defined at https://circleci.com/gh/organizations/roypa/settings#contexts
           context: Roys Context
       - do-stuff-if:
-          should-run: $([ -n "$CIRCLE_PROJECT_REPONAME" ] && true || false)
+          # This does not work as ENV variables cannot be used in parameters yet. There is created an issue for this sp should be supported in the future.
+          #should-run: [ -n "$CIRCLE_PROJECT_REPONAME" ] && true || false
+          should-run: false
           requires:
             - build-the-app
       - test-the-app:
