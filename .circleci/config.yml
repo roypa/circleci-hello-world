@@ -38,9 +38,9 @@ jobs:
       # cache can be restored between runs, while persist_to_workspace/attach_workspace is transfer of state between jobs in the same run
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "package.json" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
+            - v1-dependencies-{{ checksum "package.json" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
 
       - run: yarn install
 
@@ -74,6 +74,10 @@ jobs:
         type: boolean
         default: true
     steps:
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            - v1-dependencies-
       - run: "echo Should this be run: << parameters.should-run >>"
       - when:
           condition: << parameters.should-run >>
@@ -91,8 +95,8 @@ jobs:
 
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "package.json" }}
-          - v1-dependencies-
+            - v1-dependencies-{{ checksum "package.json" }}
+            - v1-dependencies-
 
       - say-hello-using-node
       - run: yarn test
