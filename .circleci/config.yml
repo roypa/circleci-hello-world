@@ -73,11 +73,12 @@ jobs:
         type: boolean
         default: true
     steps:
-      when:
-        condition: << parameters.should-run >>
-        steps:
-          - run: cat ./roys_workspace/echo-output.txt
-          - run: cat ./roys_workspace/$CIRCLE_PROJECT_REPONAME.txt
+      - run: "echo Should this be run: << parameters.should-run >>"
+      - when:
+          condition: << parameters.should-run >>
+          steps:
+            - run: cat ./roys_workspace/echo-output.txt
+            - run: cat ./roys_workspace/$CIRCLE_PROJECT_REPONAME.txt
 
 
   test-the-app:
