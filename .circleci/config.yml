@@ -128,7 +128,7 @@ workflows:
           # Defined at https://circleci.com/gh/organizations/roypa/settings#contexts
           context: Roys Context
       - do-stuff-if:
-          should-run: true
+          should-run: $([ -n "$CIRCLE_PROJECT_REPONAME" ] && true || false)
           requires:
             - build-the-app
       - test-the-app:
