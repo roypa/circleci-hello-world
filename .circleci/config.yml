@@ -68,6 +68,7 @@ jobs:
   do-stuff-if:
     docker:
       - image: circleci/node:10
+    working_directory: ~/repo
     parameters:
       should-run:
         type: boolean
